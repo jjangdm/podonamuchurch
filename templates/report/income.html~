@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>수입</title>
+<style type="text/css">
+#list {font-size:10px; border-spacing:0; width:100%; }
+#total_list {font-size: 12px; border-spacing: 0;}
+#title {font-size: 15px; text-align: center;}
+#title2 {font-size: 15px; text-align: center; color: red;}
+#sign {font-size: 13px; }
+#time_stamp {font-size: 8px; text-align: left; color: blue;}
+</style>
+</head>
+{% load humanize %}
+<body>
+
+
+
+<table width='100%' align='center'>
+  <tr>
+    <td align='left' width='25%' valign="top">
+        <p id="time_stamp">{{ today.date }} {{ today.time }}</p>
+    </td>
+    <td align='center' width='50%'>
+      <div style="text-align:center; font-size:14px;">
+							 <p id="title">{{ today.date }} 헌금내역</p>
+         <p id="title2">{{ sum_today|intcomma }} 원</p>
+					</div> 
+    </td>
+    <td align='right' width='25%' valign='bottom'>
+      <table width='100%' align='center' border='1' bordercolor='#eaeaf1' cellspacing='0'>
+        <tr id="sign">
+          <td width='50%' align='center'>이 름</td>
+          <td width='50%' align='center'>서 명</td>
+        </tr>
+        <tr>
+          <td height='25'></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td height='25'></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td height='25'></td>
+          <td></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+<hr>
+
+<table align="center" width="80%" border=0 cellspacing="0">
+<tr>
+   <td width="50%">주일헌금</td>
+   <td width="50%">십일조</td>
+</tr>
+<tr valign="top">   
+   <td>
+      <table id="list" align="center" border="1">
+    <tr bgcolor="#eeeeef">
+       <td align="center">이름</td> 
+       <td align="center">금액</td>           
+    </tr>
+    {% for p in lordday %}
+    <tr>
+       <td align="center">{{ p.member.name }}</td>
+       <td align="right">{{ p.money|intcomma }}</td>
+    </tr> 
+    {% endfor %} 
+    <tr bgcolor="yellow">
+         <td align="center">{{ lordday.count }} 건</td> 
+         <td align="right">{{ sum_lordday|intcomma }}</td>   
+    </tr>      
+     </table>
+   </td>
+   <td>
+     <table id="list" align="center" border="1">
+    <tr bgcolor="#eeeeef">
+       <td align="center">이름</td> 
+       <td align="center">금액</td>           
+    </tr>
+    {% for p in tithe %}
+    <tr>
+       <td align="center">{{ p.member.name }}</td>
+       <td align="right">{{ p.money|intcomma }}</td>
+    </tr> 
+    {% endfor %}
+    <tr bgcolor="yellow">
+         <td align="center">{{ tithe.count }} 건</td> 
+         <td align="right">{{ sum_tithe|intcomma }}</td>   
+    </tr>    
+    </table>
+   </td>
+  </tr>
+  
+  <tr>
+   <td width="50%">감사헌금</td>
+   <td width="50%">선교헌금</td>
+</tr>
+<tr valign="top">
+   <td>
+      <table id="list" align="center" border="1">
+    <tr bgcolor="#eeeeef">
+       <td align="center">이름</td> 
+       <td align="center">금액</td> 
+       <td align="center">비고</td>          
+    </tr>
+    {% for p in thanks %}
+    <tr>
+       <td align="center">{{ p.member.name }}</td>
+       <td align="right">{{ p.money|intcomma }}</td>
+       <td>{{ p.comment }}</td>
+    </tr> 
+    {% endfor %}    
+    <tr bgcolor="yellow">
+         <td align="center">{{ thanks.count }} 건</td> 
+         <td align="right">{{ sum_thanks|intcomma }}</td> 
+         <td></td>  
+    </tr>   
+     </table>
+   </td>
+   <td>
+     <table id="list" align="center" border="1">
+    <tr bgcolor="#eeeeef">
+       <td align="center">이름</td> 
+       <td align="center">금액</td>           
+    </tr>
+    {% for p in mission %}
+    <tr>
+       <td align="center">{{ p.member.name }}</td>
+       <td align="right">{{ p.money|intcomma }}</td>
+    </tr> 
+    {% endfor %}   
+    <tr bgcolor="yellow">
+         <td align="center">{{ mission.count }} 건</td> 
+         <td align="right">{{ sum_mission|intcomma }}</td>   
+    </tr>    
+    </table>
+   </td>
+  </tr>
+  
+  <tr>
+   <td width="50%">감사(절기)</td>
+   <td width="50%">선교(지정)</td>
+  </tr>
+  <tr valign="top">
+   <td>
+      <table id="list" align="center" border="1">
+    <tr bgcolor="#eeeeef">
+       <td align="center">이름</td> 
+       <td align="center">금액</td> 
+       <td align="center">비고</td>          
+    </tr>
+    {% for p in thanks_special %}
+    <tr>
+       <td align="center">{{ p.member.name }}</td>
+       <td align="right">{{ p.money|intcomma }}</td>
+       <td>{{ p.comment }}</td>
+    </tr> 
+    {% endfor %}    
+    <tr bgcolor="yellow">
+         <td align="center">{{ thanks_special.count }} 건</td> 
+         <td align="right">{{ sum_thanks_special|intcomma }}</td>   
+         <td></td>
+    </tr>   
+     </table>
+   </td>
+   <td>
+     <table id="list" align="center" border="1">
+    <tr bgcolor="#eeeeef">
+       <td align="center">이름</td> 
+       <td align="center">금액</td> 
+       <td align="center">비고</td>          
+    </tr>
+    {% for p in mission_special %}
+    <tr>
+       <td align="center">{{ p.member.name }}</td>
+       <td align="right">{{ p.money|intcomma }}</td>
+       <td>{{ p.comment }}</td>
+    </tr> 
+    {% endfor %}    
+    <tr bgcolor="yellow">
+         <td align="center">{{ mission_special.count }} 건</td> 
+         <td align="right">{{ sum_mission_special|intcomma }}</td>   
+         <td></td>
+    </tr>   
+    </table>
+   </td>
+  </tr>
+  
+   <tr>
+   <td width="50%">헌금외수입</td>
+   <td width="50%"></td>
+  </tr>
+  <tr valign="top">
+   <td>
+      <table id="list" align="center" border="1">
+    <tr bgcolor="#eeeeef">
+       <td align="center">내용</td> 
+       <td align="center">금액</td> 
+       <td align="center">비고</td>          
+    </tr>
+    {% for p in etc %}
+    <tr>
+       <td align="center">{{ p.member.name }}</td>
+       <td align="right">{{ p.money|intcomma }}</td>
+       <td>{{ p.comment }}</td>
+    </tr> 
+    {% endfor %}    
+    <tr bgcolor="yellow">
+         <td align="center">{{ etc.count }} 건</td> 
+         <td align="right">{{ sum_etc|intcomma }}</td>   
+         <td></td>
+    </tr>   
+     </table>
+   </td>
+   <td>
+   </td>
+  </tr>
+</table>
+<hr>
+
+<table id="total_list" width="80%" align="center" border="1" cellspacing="0">
+<tr>
+<td align="center" width="20%">항목</td>
+<td align="center" width="30%">{{ today.month }}월 현황</td>
+<td align="center" width="30%">{{ today.year }}년 현황</td>
+<td align="center" width="20%">{{ today.year }} 예산대비율(%)</td>
+</tr>
+<tr>
+<td align="center">주일헌금</td>
+<td align="right">{{ sum_lordday_month|intcomma }}</td>
+<td align="right">{{ sum_lordday_year|intcomma }}</td>
+<td align="right">{{ rate_lordday|floatformat }}</td>
+</tr>
+<tr>
+<td align="center">십일조</td>
+<td align="right">{{ sum_tithe_month|intcomma }}</td>
+<td align="right">{{ sum_tithe_year|intcomma }}</td>
+<td align="right">{{ rate_tithe|floatformat }}</td>
+</tr>
+<tr>
+<td align="center">감사헌금</td>
+<td align="right">{{ sum_thanks_month|intcomma }}</td>
+<td align="right">{{ sum_thanks_year|intcomma }}</td>
+<td align="right">{{ rate_thanks|floatformat }}</td>
+</tr>
+<tr>
+<td align="center">감사헌금(절기)</td>
+<td align="right">{{ sum_thanks_special_month|intcomma }}</td>
+<td align="right">{{ sum_thanks_special_year|intcomma }}</td>
+<td align="right">{{ rate_thanks_special|floatformat }}</td>
+</tr>
+<tr>
+<td align="center">선교헌금</td>
+<td align="right">{{ sum_mission_month|intcomma }}</td>
+<td align="right">{{ sum_mission_year|intcomma }}</td>
+<td align="right">{{ rate_mission|floatformat }}</td>
+</tr>
+<tr>
+<td align="center">선교헌금(지정)</td>
+<td align="right">{{ sum_mission_special_month|intcomma }}</td>
+<td align="right">{{ sum_mission_special_year|intcomma }}</td>
+<td align="right">{{ rate_mission_special|floatformat }}</td>
+</tr>
+<tr>
+<td align="center">헌금외수입</td>
+<td align="right">{{ sum_etc_month|intcomma }}</td>
+<td align="right">{{ sum_etc_year|intcomma }}</td>
+<td align="right">{{ rate_etc|floatformat }}</td>
+</tr>
+<tr>
+<td align="center">합계</td>
+<td align="right">{{ total_income_month|intcomma }}</td>
+<td align="right">{{ total_income|intcomma }}</td>
+<td align="right">{{ rate_total|floatformat }}
+</tr>
+
+</table>
+
+
+
+
+
+</body>
+</html>

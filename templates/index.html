@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>재정관리프로그램</title>
+<style type="text/css">
+#menu {font-size:12px; text-align:center; color:orange;}
+</style>
+</head>
+<body>
+
+<p style="text-align:left; font-size:9px;">ver 1.0, updated at {{ today.date }}</p>
+
+<table id="menu" align="center" width="30%">
+<tr>
+<td align="left"><li><a href="../index">처음화면</a></li></td>
+</tr>
+<tr>
+<td align="left"><li><a href="../report/member">교인명부</a></li></td>
+</tr>
+<tr>
+<td align="left"><li><a href="../report/budget">{{ today.year }}예산</a></li></td>
+</tr>
+<tr>
+<td align="left"><li><a href="../report/income">수입보고서</a></li></td>
+</tr>
+<tr>
+<td align="left"><li><a href="../report/total">수입지출현황</a></li></td>
+</tr>
+<tr>
+<td align="left"><li><a href="../admin/">입력페이지</a></li></td>
+</tr>
+</table>
+
+</body>
+</html>

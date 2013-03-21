@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>{{ today.year }} 예산</title>
+
+<style type="text/css">
+#list {font-size:9px; border-spacing: 0; }
+#title {font-size: 15px; text-align: center;}
+#time_stamp {font-size: 8px; text-align: left; color: blue;}
+#display {font-size: 15px; text-align: center; color: red;}
+</style>
+
+</head>
+
+{% load humanize %}
+
+
+<body>
+
+<p id="time_stamp">{{ today.date }} {{ today.time }}</p>
+<p id="title">{{ today.year }}년도 예산 </p>
+<p id="display">총액: {{ total_budget|intcomma }}원  ({{ budget_list.count }}항목) </p>
+<table id="list" border="1" align="center" width="85%">
+   <tr bgcolor="yellow">
+       <td align="center">범주</td>
+       <td align="center">항목번호</td>
+       <td align="center">항목</td>
+       <td align="center">금액</td>
+       <td align="center">전년대비(%)</td>
+       <td align="center">비고</td>
+   </tr>
+{% for p in budget_list %}
+   <tr>
+        <td align="center">{{ p.category.title }}</td>
+        <td align="center">{{ p.item.item_number }}</td>
+        <td align="left">{{ p.item.title }}</td>
+        <td align="right">{{ p.money|intcomma }}</td>
+        <td align="right">{{ p.delta|floatformat }}</td>
+        <td>{{ p.comment }}</td>
+   </tr>
+{% endfor %} 
+</table>
+</body>
+</html>

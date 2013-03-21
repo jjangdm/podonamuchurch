@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Member: {{ member_list.count }}명</title>
+
+<style type="text/css">
+#list {font-size:9px; border-spacing: 0; }
+#title {font-size: 15px; text-align: center;}
+</style>
+
+</head>
+
+
+
+
+<body>
+
+<p id="title">{{ today.year }}년 포도나무가지 </p>
+<table id="list" border="1" align="center" width="85%">
+   <tr bgcolor="#eeeeee">
+       <td align="center">NO</td>
+       <td align="center">이름</td>
+       <td align="center">이메일</td>
+       <td align="center">전화번호</td>
+       <td align="center">주소</td>
+       <td align="center">홈페이지</td>
+       <td align="center">생일</td>
+       <td align="center">가족</td>
+       <td align="center">비고</td>
+   </tr>
+   {% for p in member_list %}
+   <tr>
+        <td align="center">{{ p.pk }}</td>
+        <td align="center">{{ p.name }}</td>
+        <td>{{ p.email }}</td>
+        <td align="center">{{ p.phone }}</td>
+        <td>{{ p.address }}</td>
+        <td><a href="{{ p.homepage }}">{{ p.homepage }}</a></td>
+        <td align="center">{{ p.birthday }}</td>
+        <td>{{ p.family_list }}</td>
+        <td>{{ p.comment }}</td>
+   </tr>
+   {% endfor %}
+
+</table>
+</body>
+</html>

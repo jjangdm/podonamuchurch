@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>{{ today.year }} 종합</title>
+
+<style type="text/css">
+#content {font-size: 5px;}
+#list {border-spacing: 0; }
+#month {text-align: right; }
+#item_head {text-align: center;}
+#year {font-weight: bold; background-color: #99cc00; text-align: right;}
+#totaly {font-weight: bold; background-color: yellow;}
+#totaly_income {font-weight: bold; background-color: coral;}
+#totaly_outcome {font-weight: bold; background-color: coral;}
+</style>
+
+</head>
+
+{% load humanize %}
+
+
+<body id="content">
+<p style="text-align: left; font-size; 5px; color: blue;">{{ today.date }} {{ today.time }}</p>
+<p style="text-align: center; font-size: 12px;" width="100%">{{ today.year }}년 수입지출현황보고서</p>
+<p style="font-size: 7px; color: red" width="100%" align="center">수입: {{ total_income|intcomma }}원 / 지출: {{ total_outcome|intcomma }}원 / 잔액: {{ total|intcomma }}원</p>
+
+<table id="list" border="1" align="center" width="90%">
+   <tr bgcolor="orange">
+       <td id="item_head">카테고리</td>
+       <td id="item_head">항목</td>
+       <td id="item_head">1월</td>
+       <td id="item_head">2월</td>
+       <td id="item_head">3월</td>
+       <td id="item_head">4월</td>
+       <td id="item_head">5월</td>
+       <td id="item_head">6월</td>
+       <td id="item_head">7월</td>
+       <td id="item_head">8월</td>
+       <td id="item_head">9월</td>
+       <td id="item_head">10월</td>
+       <td id="item_head">11월</td>
+       <td id="item_head">12월</td>
+       <td id="item_head_total">합계</td>
+       <td id="item_head">예산액</td>
+       <td id="item_head">예산대비율(%)</td>
+   </tr>
+{% for p in income_list %}
+   <tr>
+       <td>{{ p.category.title }}</td>
+       <td>{{ p.title }}</td>
+       <td id="month">{{ p.january|intcomma }}</td>
+       <td id="month">{{ p.febrary|intcomma }}</td>
+       <td id="month">{{ p.march|intcomma }}</td>
+       <td id="month">{{ p.april|intcomma }}</td>
+       <td id="month">{{ p.may|intcomma }}</td>
+       <td id="month">{{ p.june|intcomma }}</td>
+       <td id="month">{{ p.july|intcomma }}</td>
+       <td id="month">{{ p.august|intcomma }}</td>
+       <td id="month">{{ p.september|intcomma }}</td>
+       <td id="month">{{ p.october|intcomma }}</td>
+       <td id="month">{{ p.november|intcomma }}</td>
+       <td id="month">{{ p.december|intcomma }}</td>
+       <td id="year">{{ p.year|intcomma }}</td>
+       <td id="month">{{ p.budget|intcomma }}
+       <td id="month">{{ p.rate|intcomma }}</td>
+   </tr>
+{% endfor %} 
+   <tr id="totaly_income">
+     <td align="center">수입</td>
+     <td align="center">수입소계</td>
+     {% for q in monthly_sum_income %}
+     <td align="right">{{ q|intcomma }}</td>
+     {% endfor %}
+     <td align="right">{{ total_income|intcomma }}</td>
+     <td align="right">{{ total_budget_income|intcomma }}</td>
+     <td align="right">{{ rate_income|floatformat }}%</td>
+   </tr>
+{% for p in management_list %}
+   <tr>
+       <td>{{ p.category.title }}</td>
+       <td>{{ p.title }}</td>
+       <td id="month">{{ p.january|intcomma }}</td>
+       <td id="month">{{ p.febrary|intcomma }}</td>
+       <td id="month">{{ p.march|intcomma }}</td>
+       <td id="month">{{ p.april|intcomma }}</td>
+       <td id="month">{{ p.may|intcomma }}</td>
+       <td id="month">{{ p.june|intcomma }}</td>
+       <td id="month">{{ p.july|intcomma }}</td>
+       <td id="month">{{ p.august|intcomma }}</td>
+       <td id="month">{{ p.september|intcomma }}</td>
+       <td id="month">{{ p.october|intcomma }}</td>
+       <td id="month">{{ p.november|intcomma }}</td>
+       <td id="month">{{ p.december|intcomma }}</td>
+       <td id="year">{{ p.year|intcomma }}</td>
+       <td id="month">{{ p.budget|intcomma }}
+       <td id="month">{{ p.rate|intcomma }}</td>
+   </tr>
+{% endfor %} 
+   <tr id="totaly">
+     <td align="center">지출</td>
+     <td align="center">관리비소계</td>
+     {% for q in monthly_sum_management %}
+     <td align="right">{{ q|intcomma }}</td>
+     {% endfor %}
+     <td align="right">{{ total_management|intcomma }}</td>
+     <td align="right">{{ total_budget_management|intcomma }}</td>
+     <td align="right">{{ rate_management|floatformat }}%</td>
+   </tr>
+{% for p in education_list %}
+   <tr>
+       <td>{{ p.category.title }}</td>
+       <td>{{ p.title }}</td>
+       <td id="month">{{ p.january|intcomma }}</td>
+       <td id="month">{{ p.febrary|intcomma }}</td>
+       <td id="month">{{ p.march|intcomma }}</td>
+       <td id="month">{{ p.april|intcomma }}</td>
+       <td id="month">{{ p.may|intcomma }}</td>
+       <td id="month">{{ p.june|intcomma }}</td>
+       <td id="month">{{ p.july|intcomma }}</td>
+       <td id="month">{{ p.august|intcomma }}</td>
+       <td id="month">{{ p.september|intcomma }}</td>
+       <td id="month">{{ p.october|intcomma }}</td>
+       <td id="month">{{ p.november|intcomma }}</td>
+       <td id="month">{{ p.december|intcomma }}</td>
+       <td id="year">{{ p.year|intcomma }}</td>
+       <td id="month">{{ p.budget|intcomma }}
+       <td id="month">{{ p.rate|intcomma }}</td>
+   </tr>
+{% endfor %} 
+   <tr id="totaly">
+     <td align="center">지출</td>
+     <td align="center">교육비소계</td>
+     {% for q in monthly_sum_education %}
+     <td align="right">{{ q|intcomma }}</td>
+     {% endfor %}
+     <td align="right">{{ total_education|intcomma }}</td>
+     <td align="right">{{ total_budget_education|intcomma }}</td>
+     <td align="right">{{ rate_education|floatformat }}%</td>
+   </tr>   
+   
+{% for p in feed_list %}
+   <tr>
+       <td>{{ p.category.title }}</td>
+       <td>{{ p.title }}</td>
+       <td id="month">{{ p.january|intcomma }}</td>
+       <td id="month">{{ p.febrary|intcomma }}</td>
+       <td id="month">{{ p.march|intcomma }}</td>
+       <td id="month">{{ p.april|intcomma }}</td>
+       <td id="month">{{ p.may|intcomma }}</td>
+       <td id="month">{{ p.june|intcomma }}</td>
+       <td id="month">{{ p.july|intcomma }}</td>
+       <td id="month">{{ p.august|intcomma }}</td>
+       <td id="month">{{ p.september|intcomma }}</td>
+       <td id="month">{{ p.october|intcomma }}</td>
+       <td id="month">{{ p.november|intcomma }}</td>
+       <td id="month">{{ p.december|intcomma }}</td>
+       <td id="year">{{ p.year|intcomma }}</td>
+       <td id="month">{{ p.budget|intcomma }}
+       <td id="month">{{ p.rate|intcomma }}</td>
+   </tr>
+{% endfor %} 
+   <tr id="totaly">
+     <td align="center">지출</td>
+     <td align="center">목회비소계</td>
+     {% for q in monthly_sum_feed %}
+     <td align="right">{{ q|intcomma }}</td>
+     {% endfor %}
+     <td align="right">{{ total_feed|intcomma }}</td>
+     <td align="right">{{ total_budget_feed|intcomma }}</td>
+     <td align="right">{{ rate_feed|floatformat }}%</td>
+   </tr>     
+   
+{% for p in reward_list %}
+   <tr>
+       <td>{{ p.category.title }}</td>
+       <td>{{ p.title }}</td>
+       <td id="month">{{ p.january|intcomma }}</td>
+       <td id="month">{{ p.febrary|intcomma }}</td>
+       <td id="month">{{ p.march|intcomma }}</td>
+       <td id="month">{{ p.april|intcomma }}</td>
+       <td id="month">{{ p.may|intcomma }}</td>
+       <td id="month">{{ p.june|intcomma }}</td>
+       <td id="month">{{ p.july|intcomma }}</td>
+       <td id="month">{{ p.august|intcomma }}</td>
+       <td id="month">{{ p.september|intcomma }}</td>
+       <td id="month">{{ p.october|intcomma }}</td>
+       <td id="month">{{ p.november|intcomma }}</td>
+       <td id="month">{{ p.december|intcomma }}</td>
+       <td id="year">{{ p.year|intcomma }}</td>
+       <td id="month">{{ p.budget|intcomma }}
+       <td id="month">{{ p.rate|intcomma }}</td>
+   </tr>
+{% endfor %} 
+   <tr id="totaly">
+     <td align="center">지출</td>
+     <td align="center">사례비소계</td>
+     {% for q in monthly_sum_reward %}
+     <td align="right">{{ q|intcomma }}</td>
+     {% endfor %}
+     <td align="right">{{ total_reward|intcomma }}</td>
+     <td align="right">{{ total_budget_reward|intcomma }}</td>
+     <td align="right">{{ rate_reward|floatformat }}%</td>
+   </tr>     
+   
+   
+{% for p in mission_list %}
+   <tr>
+       <td>{{ p.category.title }}</td>
+       <td>{{ p.title }}</td>
+       <td id="month">{{ p.january|intcomma }}</td>
+       <td id="month">{{ p.febrary|intcomma }}</td>
+       <td id="month">{{ p.march|intcomma }}</td>
+       <td id="month">{{ p.april|intcomma }}</td>
+       <td id="month">{{ p.may|intcomma }}</td>
+       <td id="month">{{ p.june|intcomma }}</td>
+       <td id="month">{{ p.july|intcomma }}</td>
+       <td id="month">{{ p.august|intcomma }}</td>
+       <td id="month">{{ p.september|intcomma }}</td>
+       <td id="month">{{ p.october|intcomma }}</td>
+       <td id="month">{{ p.november|intcomma }}</td>
+       <td id="month">{{ p.december|intcomma }}</td>
+       <td id="year">{{ p.year|intcomma }}</td>
+       <td id="month">{{ p.budget|intcomma }}
+       <td id="month">{{ p.rate|intcomma }}</td>
+   </tr>
+{% endfor %} 
+   <tr id="totaly">
+     <td align="center">지출</td>
+     <td align="center">선교비소계</td>
+     {% for q in monthly_sum_mission %}
+     <td align="right">{{ q|intcomma }}</td>
+     {% endfor %}
+     <td align="right">{{ total_mission|intcomma }}</td>
+     <td align="right">{{ total_budget_mission|intcomma }}</td>
+     <td align="right">{{ rate_mission|floatformat }}%</td>
+   </tr>    
+
+
+{% for p in operation_list %}
+   <tr>
+       <td>{{ p.category.title }}</td>
+       <td>{{ p.title }}</td>
+       <td id="month">{{ p.january|intcomma }}</td>
+       <td id="month">{{ p.febrary|intcomma }}</td>
+       <td id="month">{{ p.march|intcomma }}</td>
+       <td id="month">{{ p.april|intcomma }}</td>
+       <td id="month">{{ p.may|intcomma }}</td>
+       <td id="month">{{ p.june|intcomma }}</td>
+       <td id="month">{{ p.july|intcomma }}</td>
+       <td id="month">{{ p.august|intcomma }}</td>
+       <td id="month">{{ p.september|intcomma }}</td>
+       <td id="month">{{ p.october|intcomma }}</td>
+       <td id="month">{{ p.november|intcomma }}</td>
+       <td id="month">{{ p.december|intcomma }}</td>
+       <td id="year">{{ p.year|intcomma }}</td>
+       <td id="month">{{ p.budget|intcomma }}
+       <td id="month">{{ p.rate|intcomma }}</td>
+   </tr>
+{% endfor %} 
+   <tr id="totaly">
+     <td align="center">지출</td>
+     <td align="center">운영비소계</td>
+     {% for q in monthly_sum_operation %}
+     <td align="right">{{ q|intcomma }}</td>
+     {% endfor %}
+     <td align="right">{{ total_operation|intcomma }}</td>
+     <td align="right">{{ total_budget_operation|intcomma }}</td>
+     <td align="right">{{ rate_operation|floatformat }}%</td>
+   </tr>  
+
+{% for p in etc_list %}
+   <tr>
+       <td>{{ p.category.title }}</td>
+       <td>{{ p.title }}</td>
+       <td id="month">{{ p.january|intcomma }}</td>
+       <td id="month">{{ p.febrary|intcomma }}</td>
+       <td id="month">{{ p.march|intcomma }}</td>
+       <td id="month">{{ p.april|intcomma }}</td>
+       <td id="month">{{ p.may|intcomma }}</td>
+       <td id="month">{{ p.june|intcomma }}</td>
+       <td id="month">{{ p.july|intcomma }}</td>
+       <td id="month">{{ p.august|intcomma }}</td>
+       <td id="month">{{ p.september|intcomma }}</td>
+       <td id="month">{{ p.october|intcomma }}</td>
+       <td id="month">{{ p.november|intcomma }}</td>
+       <td id="month">{{ p.december|intcomma }}</td>
+       <td id="year">{{ p.year|intcomma }}</td>
+       <td id="month">{{ p.budget|intcomma }}
+       <td id="month">{{ p.rate|intcomma }}</td>
+   </tr>
+{% endfor %} 
+   <tr id="totaly">
+     <td align="center">지출</td>
+     <td align="center">예비비소계</td>
+     {% for q in monthly_sum_etc %}
+     <td align="right">{{ q|intcomma }}</td>
+     {% endfor %}
+     <td align="right">{{ total_etc|intcomma }}</td>
+     <td align="right">{{ total_budget_etc|intcomma }}</td>
+     <td align="right">{{ rate_etc|floatformat }}%</td>
+   </tr>  
+   <tr id="totaly_outcome">
+     <td align="center">지출</td>
+     <td align="center">지출누계</td>
+     {% for q in monthly_sum_outcome %}
+     <td align="right">{{ q|intcomma }}</td>
+     {% endfor %}
+     <td align="right">{{ total_outcome|intcomma }}</td>
+     <td align="right">{{ total_budget_outcome|intcomma }}</td>
+     <td align="right">{{ rate_outcome|floatformat }}%</td>
+   </tr>  
+</table>
+
+<p style="font-size:5px;">Best condition to B4</p>
+</body>
+</html>
